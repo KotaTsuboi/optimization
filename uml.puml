@@ -1,0 +1,128 @@
+@startuml
+
+hide empty member
+
+package jp.ac.u_tokyo.iis.space.optimization.algorithm {
+    abstract class OptimizationAlgorithm {
+        - OptimizationProblem problem
+        + OptimizationAlgorithm(OptimizationProblem problem)
+        + {abstract} Solution solve()
+    }
+    abstract class ContinuousAlgorithm extends OptimizationAlgorithm {
+        - ContinuousProblem problem
+        + ContinuousAlgorithm(ContinuousProblem problem)
+        + {abstract} ContinuousSolution solve()
+    }
+    class SimplexMethod extends ContinuousAlgorithm {
+        - LinearProgrammingProblem lp
+        + SimplexMethod(LinearProgrammingProblem lp)
+        + DoubleSolution solve()
+    }
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.boundary {
+    abstract class BoundaryCondition
+    abstract class ContinuousBoundaryCondition extends BoundaryCondition
+    class NonnegativeCondition extends ContinuousBoundaryCondition
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.constraint {
+    abstract class Constraint {
+        + {abstract} int getNumVariable()
+        + {abstract} int getNumEquation()
+    }
+    abstract class ContinuousConstraint extends Constraint
+    class LinearConstraint extends ContinuousConstraint {
+        - LinearEquation[] equations
+        + double getCoefficient(int i, int j)
+        + double getConstant(int j)
+    }
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.equation {
+    abstract class Equation {
+        + {abstract} int getNumVariable()
+    }
+    abstract class ContinuousEquation extends Equation
+    class LinearEquation extends ContinuousEquation {
+        + double getCoefficient(int i)
+        + double getConstant()
+    }
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.symbol {
+    enum EquationSymbol
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.function {
+    abstract class ObjectiveFunction {
+        + {abstract} int getNumVariable()
+    }
+    abstract class ContinuousFunction extends ObjectiveFunction
+    class LinearFunction extends ContinuousFunction {
+        + double getCost(int i)
+    }
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.problem {
+    abstract class OptimizationProblem {
+        - Function function
+        - Constraint constraint
+        - BoundaryCondition condition
+        + OptimizationProblem(Function function, Constraint constraint, BoundaryCondition condition)
+        + int getNumVariable()
+        + int getNumEquation()
+    }
+    abstract class ContinuousProblem extends OptimizationProblem {
+        - ContinuousFunction function
+        - ContinuousConstraint constraint
+        - ContinuousBoundaryCondition condition
+        + ContinuousProblem(ContinuousFunction function, ContinuousConstraint constraint, ContinousBoundaryCondition condition)
+    }
+    class LinearProgrammingProblem extends ContinuousProblem {
+        - LinearFunction function
+        - LinearConstraint constraint
+        - NonnegativeCondition condition
+        + double getCost(int i)
+        + double getCoefficient(int i, int j)
+        + double getConstant(int j)
+        + LinearProgrammingProblem toStandardForm()
+        + boolean isStandardForm()
+        + LinearProgrammingProblem(LinearFunction function, LinearConstraint constraint, NonnegativeCondition condition)
+    }
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.solution {
+    abstract class Solution
+    abstract class ContinuousSolution extends Solution
+    class DoubleSolution extends ContinuousSolution
+}
+
+package jp.ac.u_tokyo.iis.space.optimization.orientation {
+    enum Orientation
+}
+
+OptimizationAlgorithm ..> Solution
+ContinuousAlgorithm ..> ContinuousSolution
+SimplexMethod ..> DoubleSolution
+OptimizationAlgorithm ..> OptimizationProblem
+ContinuousAlgorithm ..> ContinuousProblem
+SimplexMethod ..> LinearProgrammingProblem
+OptimizationProblem --* BoundaryCondition
+OptimizationProblem --* Constraint
+OptimizationProblem --* ObjectiveFunction
+OptimizationProblem ..> Orientation
+ContinuousProblem --* ContinuousConstraint
+ContinuousProblem --* ContinuousFunction
+ContinuousProblem --* ContinuousBoundaryCondition
+ContinuousProblem ..> Orientation
+LinearProgrammingProblem --* NonnegativeCondition
+LinearProgrammingProblem --* LinearConstraint
+LinearProgrammingProblem --* LinearFunction
+LinearProgrammingProblem ..> EquationSymbol
+LinearProgrammingProblem ..> Orientation
+Constraint ..> Equation
+LinearConstraint --* LinearEquation
+LinearConstraint ..> EquationSymbol
+LinearEquation ..> EquationSymbol
+@enduml
