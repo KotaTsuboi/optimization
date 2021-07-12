@@ -7,4 +7,6 @@ package tsuboi.kota.optimization.solution;
 abstract public class AbstractContinuousSolution {
 
     abstract public double getValue(int i);
+
+    abstract public boolean isNull();
 }

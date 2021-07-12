@@ -2,6 +2,7 @@ package tsuboi.kota.optimization.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import org.ejml.simple.SimpleMatrix;
 import tsuboi.kota.optimization.problem.LinearProgrammingProblem;
 import tsuboi.kota.optimization.solution.AbstractContinuousSolution;
@@ -28,8 +29,10 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
     private final ArrayList<Integer> variableIndexes;
 
     public SimplexMethod(LinearProgrammingProblem lp) {
+        Objects.requireNonNull(lp);
+
         if (!lp.isStandardForm()) {
-            throw new IllegalArgumentException("標準形のみサポートしています。");
+            lp = lp.toStandardForm();
         }
 
         N = new SimpleMatrix(lp.getCoefficietns());
@@ -69,12 +72,12 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
         boolean firstTime = true;
         DoubleSolution solution = calculate(firstTime);
 
-        if (solution == null) {
+        if (solution.isNull()) {
             System.out.println("巡回しました。最小添字規則に変更します。");
             firstTime = false;
             solution = calculate(firstTime);
 
-            if (solution == null) {
+            if (solution.isNull()) {
                 System.out.println("最小添字規則でも最適解が見つかりませんでした。");
                 System.exit(1);
             }
@@ -109,14 +112,14 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
                 optimalSolution = smallestScriptRule();
             }
 
-            if (optimalSolution != null) {
+            if (!optimalSolution.isNull()) {
                 return optimalSolution;
             }
 
             step++;
         }
 
-        return null;
+        return new DoubleSolution();
     }
 
     private DoubleSolution largestCoefficientRule() {
@@ -136,7 +139,7 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
             return new DoubleSolution(extractOptimalSolution());
         }
 
-        return null;
+        return new DoubleSolution();
     }
 
     private DoubleSolution smallestScriptRule() {
@@ -154,7 +157,7 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
             return new DoubleSolution(extractOptimalSolution());
         }
 
-        return null;
+        return new DoubleSolution();
     }
 
     private double[] extractOptimalSolution() {

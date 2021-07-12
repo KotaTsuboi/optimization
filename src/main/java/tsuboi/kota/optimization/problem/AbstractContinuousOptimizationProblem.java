@@ -9,7 +9,11 @@ import tsuboi.kota.optimization.constraint.AbstractContinuousConstraint;
  */
 abstract public class AbstractContinuousOptimizationProblem extends AbstractOptimizationProblem {
 
-    public AbstractContinuousOptimizationProblem(boolean maximize, AbstractContinuousFunction continuousFunction, AbstractContinuousConstraint continuousConstraint) {
-        super(maximize, continuousFunction, continuousConstraint);
+    public AbstractContinuousOptimizationProblem(boolean maximize, AbstractContinuousFunction objectiveFunction, AbstractContinuousConstraint constraint) {
+        super(maximize, objectiveFunction, constraint);
+    }
+
+    public AbstractContinuousOptimizationProblem(boolean maximize, AbstractContinuousFunction objectiveFunction) {
+        super(maximize, objectiveFunction);
     }
 }

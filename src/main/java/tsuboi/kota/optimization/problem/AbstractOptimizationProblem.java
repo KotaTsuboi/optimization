@@ -1,5 +1,6 @@
 package tsuboi.kota.optimization.problem;
 
+import java.util.Objects;
 import tsuboi.kota.optimization.function.AbstractObjectiveFunction;
 import tsuboi.kota.optimization.constraint.AbstractConstraint;
 
@@ -18,6 +19,9 @@ abstract public class AbstractOptimizationProblem {
     protected final int numVariable;
 
     public AbstractOptimizationProblem(boolean maximize, AbstractObjectiveFunction objectiveFunction, AbstractConstraint constraint) {
+        Objects.requireNonNull(objectiveFunction);
+        Objects.requireNonNull(constraint);
+
         this.maximize = maximize;
         this.objectiveFunction = objectiveFunction;
         this.constraint = constraint;
@@ -28,6 +32,10 @@ abstract public class AbstractOptimizationProblem {
 
         this.numEquation = constraint.getNumEquation();
         this.numVariable = constraint.getNumVariable();
+    }
+
+    public AbstractOptimizationProblem(boolean maximize, AbstractObjectiveFunction objectiveFunction) {
+        this(maximize, objectiveFunction, null);
     }
 
     public int getNumEquation() {
@@ -41,4 +49,7 @@ abstract public class AbstractOptimizationProblem {
     public boolean isMaximize() {
         return maximize;
     }
+
+    @Override
+    abstract public String toString();
 }
