@@ -2,23 +2,23 @@
 <metadata modelVersion="1.1.0">
   <groupId>jp.ac.u_tokyo.iis.space</groupId>
   <artifactId>optimization</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.5-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20210712.142524</timestamp>
+      <timestamp>20210712.143229</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20210712142524</lastUpdated>
+    <lastUpdated>20210712143229</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.4-20210712.142524-1</value>
-        <updated>20210712142524</updated>
+        <value>1.5-20210712.143229-1</value>
+        <updated>20210712143229</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.4-20210712.142524-1</value>
-        <updated>20210712142524</updated>
+        <value>1.5-20210712.143229-1</value>
+        <updated>20210712143229</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
