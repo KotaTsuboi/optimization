@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: jp.ac.u_tokyo.iis.space.optimization.algorithm.SimplexMethodTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.172 s - in jp.ac.u_tokyo.iis.space.optimization.algorithm.SimplexMethodTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.212 s - in jp.ac.u_tokyo.iis.space.optimization.algorithm.SimplexMethodTest
