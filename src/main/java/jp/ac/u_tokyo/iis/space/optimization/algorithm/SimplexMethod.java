@@ -29,6 +29,7 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
     private final int m;
     private final int n;
 
+    private final int initialNumVariable;
     private final int[] nonnegativeIndexes;
     private final boolean isStandardForm;
 
@@ -37,6 +38,7 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
     public SimplexMethod(LinearProgrammingProblem lp) {
         Objects.requireNonNull(lp);
 
+        initialNumVariable = lp.getNumVariable();
         nonnegativeIndexes = lp.getBoundary().getVariableIndexes();
 
         if (!lp.isStandardForm()) {
@@ -106,12 +108,12 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
             return solution;
         }
 
-        double[] solutionArray = new double[nonnegativeIndexes.length];
+        double[] solutionArray = new double[initialNumVariable];
         int j = 0;
         int i = 0;
 
-        while (i < solution.size()) {
-            if (Arrays.asList(nonnegativeIndexes).contains(j)) {
+        while (j < initialNumVariable) {
+            if (contains(nonnegativeIndexes, j)) {
                 solutionArray[j] = solution.getValue(i);
             } else {
                 solutionArray[j] = solution.getValue(i) - solution.getValue(i + 1);
@@ -122,6 +124,10 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
         }
         AbstractContinuousSolution solutionNew = new DoubleSolution(solutionArray);
         return solutionNew;
+    }
+
+    private boolean contains(final int[] arr, final int key) {
+        return Arrays.stream(arr).anyMatch(i -> i == key);
     }
 
     private DoubleSolution calculate(boolean firstTime) throws UnboundedException, UnfeasibleException {
