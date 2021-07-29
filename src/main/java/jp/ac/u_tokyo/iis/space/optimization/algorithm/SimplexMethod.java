@@ -1,14 +1,15 @@
 package jp.ac.u_tokyo.iis.space.optimization.algorithm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import jp.ac.u_tokyo.iis.space.optimization.exception.UnboundedException;
 import jp.ac.u_tokyo.iis.space.optimization.exception.UnfeasibleException;
-import org.ejml.simple.SimpleMatrix;
 import jp.ac.u_tokyo.iis.space.optimization.problem.LinearProgrammingProblem;
 import jp.ac.u_tokyo.iis.space.optimization.solution.AbstractContinuousSolution;
 import jp.ac.u_tokyo.iis.space.optimization.solution.DoubleSolution;
+import org.ejml.simple.SimpleMatrix;
 
 /**
  *
@@ -28,13 +29,21 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
     private final int m;
     private final int n;
 
+    private final int[] nonnegativeIndexes;
+    private final boolean isStandardForm;
+
     private final ArrayList<Integer> variableIndexes;
 
     public SimplexMethod(LinearProgrammingProblem lp) {
         Objects.requireNonNull(lp);
 
+        nonnegativeIndexes = lp.getBoundary().getVariableIndexes();
+
         if (!lp.isStandardForm()) {
             lp = lp.toStandardForm();
+            isStandardForm = false;
+        } else {
+            isStandardForm = true;
         }
 
         N = new SimpleMatrix(lp.getCoefficietns());
@@ -85,7 +94,34 @@ public class SimplexMethod extends AbstractOptimizationAlgorithm {
             }
         }
 
-        return solution;
+        return rebuildSolution(solution);
+    }
+
+    private AbstractContinuousSolution rebuildSolution(AbstractContinuousSolution solution) {
+        if (solution.isNull()) {
+            return solution;
+        }
+
+        if (isStandardForm) {
+            return solution;
+        }
+
+        double[] solutionArray = new double[nonnegativeIndexes.length];
+        int j = 0;
+        int i = 0;
+
+        while (i < solution.size()) {
+            if (Arrays.asList(nonnegativeIndexes).contains(j)) {
+                solutionArray[j] = solution.getValue(i);
+            } else {
+                solutionArray[j] = solution.getValue(i) - solution.getValue(i + 1);
+                i++;
+            }
+            j++;
+            i++;
+        }
+        AbstractContinuousSolution solutionNew = new DoubleSolution(solutionArray);
+        return solutionNew;
     }
 
     private DoubleSolution calculate(boolean firstTime) throws UnboundedException, UnfeasibleException {

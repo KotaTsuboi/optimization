@@ -29,7 +29,7 @@ public class DoubleSolution extends AbstractContinuousSolution {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\\(\n");
+        sb.append("\\(");
 
         for (int j = 0; j < value.length; j++) {
             sb.append("x_{");
@@ -37,7 +37,7 @@ public class DoubleSolution extends AbstractContinuousSolution {
             sb.append("}");
             sb.append("=");
             sb.append(value[j]);
-            sb.append("\n");
+            sb.append("<br>");
         }
 
         sb.append("\\)");

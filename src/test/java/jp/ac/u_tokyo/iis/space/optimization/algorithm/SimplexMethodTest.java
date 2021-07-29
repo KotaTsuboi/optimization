@@ -2,13 +2,8 @@ package jp.ac.u_tokyo.iis.space.optimization.algorithm;
 
 import java.util.stream.Stream;
 import jp.ac.u_tokyo.iis.space.optimization.boundary.NonnegativeCondition;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import jp.ac.u_tokyo.iis.space.optimization.equation.EquationSymbol;
 import jp.ac.u_tokyo.iis.space.optimization.constraint.LinearConstraint;
+import jp.ac.u_tokyo.iis.space.optimization.equation.EquationSymbol;
 import jp.ac.u_tokyo.iis.space.optimization.equation.LinearEquation;
 import jp.ac.u_tokyo.iis.space.optimization.exception.UnboundedException;
 import jp.ac.u_tokyo.iis.space.optimization.exception.UnfeasibleException;
@@ -16,10 +11,15 @@ import jp.ac.u_tokyo.iis.space.optimization.function.LinearFunction;
 import jp.ac.u_tokyo.iis.space.optimization.problem.LinearProgrammingProblem;
 import jp.ac.u_tokyo.iis.space.optimization.solution.AbstractContinuousSolution;
 import jp.ac.u_tokyo.iis.space.optimization.solution.DoubleSolution;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.params.provider.Arguments.*;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  *
@@ -125,6 +125,17 @@ public class SimplexMethodTest {
                                 new NonnegativeCondition(new int[]{0, 1})
                         ),
                         new DoubleSolution(0, 100)
+                ),
+                arguments(
+                        new LinearProgrammingProblem(
+                                true,
+                                new LinearFunction(1),
+                                new LinearConstraint(
+                                        new LinearEquation(new double[]{1}, EquationSymbol.EQUAL, 1)
+                                ),
+                                new NonnegativeCondition(new int[]{})
+                        ),
+                        new DoubleSolution(1)
                 )
         );
     }
