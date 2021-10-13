@@ -6,7 +6,7 @@ import java.util.Objects;
  *
  * @author Kota
  */
-public class LinearFunction extends ContinuousFunction {
+public class LinearFunction extends DifferentiableFunction {
 
     private static final String PLUS;
     private static final String TIMES;
@@ -36,24 +36,6 @@ public class LinearFunction extends ContinuousFunction {
 
     public double getCost(int i) {
         return costs[i];
-    }
-
-    @Override
-    public double getValue(double[] variable) {
-        checkNumVariable(variable.length);
-        double sum = 0;
-
-        for (int j = 0; j < numVariable; j++) {
-            sum += costs[j] * variable[j];
-        }
-
-        return sum;
-    }
-
-    @Override
-    public double[] getGradient(double[] variable) {
-        checkNumVariable(variable.length);
-        return costs;
     }
 
     @Override
@@ -96,6 +78,11 @@ public class LinearFunction extends ContinuousFunction {
         }
 
         return false;
+    }
+
+    @Override
+    public ContinuousFunction differential(int x) {
+        return new ConstantFunction(costs[x]);
     }
 
 }

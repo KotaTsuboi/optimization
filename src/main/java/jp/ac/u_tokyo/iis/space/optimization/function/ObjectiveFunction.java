@@ -7,4 +7,5 @@ package jp.ac.u_tokyo.iis.space.optimization.function;
 abstract public class ObjectiveFunction {
 
     abstract public int getNumVariable();
+
 }

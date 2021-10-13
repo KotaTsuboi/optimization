@@ -6,8 +6,4 @@ package jp.ac.u_tokyo.iis.space.optimization.function;
  */
 abstract public class ContinuousFunction extends ObjectiveFunction {
 
-    abstract public double getValue(double[] variable);
-
-    abstract public double[] getGradient(double[] variable);
-
 }

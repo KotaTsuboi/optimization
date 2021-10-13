@@ -66,7 +66,6 @@ public class SimplexMethodTest {
                         ),
                         new DoubleSolution(3, 3)
                 ),
-                /*
                 arguments(
                         new LinearProgrammingProblem(
                                 Orientation.MAXIMIZE,
@@ -80,7 +79,6 @@ public class SimplexMethodTest {
                         ),
                         new DoubleSolution(0, 10, 10)
                 ),
-                 */
                 arguments(
                         new LinearProgrammingProblem(
                                 Orientation.MAXIMIZE,
@@ -93,8 +91,7 @@ public class SimplexMethodTest {
                                 new NonnegativeCondition(new int[]{0, 1, 2})
                         ),
                         new DoubleSolution(-9999)
-                )
-        /*
+                ),
                 arguments(
                         new LinearProgrammingProblem(
                                 Orientation.MAXIMIZE,
@@ -107,7 +104,7 @@ public class SimplexMethodTest {
                         ),
                         new DoubleSolution(0, 100)
                 ),
-                arguments(
+                 arguments(
                         new LinearProgrammingProblem(
                                 Orientation.MAXIMIZE,
                                 new LinearFunction(1),
@@ -118,7 +115,6 @@ public class SimplexMethodTest {
                         ),
                         new DoubleSolution(1)
                 )
-         */
         );
     }
 
