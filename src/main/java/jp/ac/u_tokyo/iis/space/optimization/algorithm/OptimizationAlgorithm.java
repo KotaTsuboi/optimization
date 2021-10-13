@@ -11,7 +11,7 @@ import jp.ac.u_tokyo.iis.space.optimization.solution.Solution;
  */
 abstract public class OptimizationAlgorithm {
 
-    private OptimizationProblem problem;
+    protected OptimizationProblem problem;
 
     public OptimizationAlgorithm(OptimizationProblem problem) {
         this.problem = problem;
