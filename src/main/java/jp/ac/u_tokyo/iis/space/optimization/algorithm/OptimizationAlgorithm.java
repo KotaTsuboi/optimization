@@ -17,6 +17,6 @@ abstract public class OptimizationAlgorithm {
         this.problem = problem;
     }
 
-    abstract Solution solve() throws UnboundedException, UnfeasibleException;
+    abstract public Solution solve() throws UnboundedException, UnfeasibleException;
 
 }

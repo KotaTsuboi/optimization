@@ -16,6 +16,6 @@ abstract public class ContinuousAlgorithm extends OptimizationAlgorithm {
     }
 
     @Override
-    abstract ContinuousSolution solve() throws UnboundedException, UnfeasibleException;
+    abstract public ContinuousSolution solve() throws UnboundedException, UnfeasibleException;
 
 }

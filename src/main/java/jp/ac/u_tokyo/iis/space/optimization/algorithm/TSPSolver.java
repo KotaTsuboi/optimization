@@ -16,7 +16,7 @@ public class TSPSolver extends LocalSearchMethod {
     }
 
     @Override
-    PermutationSolution solve() throws UnboundedException, UnfeasibleException {
+    public PermutationSolution solve() throws UnboundedException, UnfeasibleException {
         TravelingSalesmanProblem tsp = (TravelingSalesmanProblem) problem;
         PermutationSolution optimalSolution = (PermutationSolution) initialSolution;
         double optimalDistance = tsp.distance(optimalSolution);

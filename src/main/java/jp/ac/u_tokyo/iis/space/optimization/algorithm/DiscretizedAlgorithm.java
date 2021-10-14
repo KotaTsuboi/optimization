@@ -16,6 +16,6 @@ abstract public class DiscretizedAlgorithm extends OptimizationAlgorithm {
     }
 
     @Override
-    abstract DiscretizedSolution solve() throws UnboundedException, UnfeasibleException;
+    abstract public DiscretizedSolution solve() throws UnboundedException, UnfeasibleException;
 
 }
