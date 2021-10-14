@@ -1,2 +1,8 @@
+jp/ac/u_tokyo/iis/space/optimization/function/LinearFunctionTest.class
+jp/ac/u_tokyo/iis/space/optimization/function/DistanceCalculatorTest.class
+jp/ac/u_tokyo/iis/space/optimization/algorithm/TSPSolverTest.class
+jp/ac/u_tokyo/iis/space/optimization/constraint/LinearConstraintTest.class
+jp/ac/u_tokyo/iis/space/optimization/algorithm/InsertionIteratorTest.class
 jp/ac/u_tokyo/iis/space/optimization/problem/LinearProgrammingProblemTest.class
 jp/ac/u_tokyo/iis/space/optimization/algorithm/SimplexMethodTest.class
+jp/ac/u_tokyo/iis/space/optimization/equation/LinearEquationTest.class

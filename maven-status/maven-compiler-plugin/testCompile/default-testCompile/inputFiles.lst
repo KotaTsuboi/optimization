@@ -1,2 +1,8 @@
 /Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/problem/LinearProgrammingProblemTest.java
 /Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/algorithm/SimplexMethodTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/algorithm/InsertionIteratorTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/function/DistanceCalculatorTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/equation/LinearEquationTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/algorithm/TSPSolverTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/constraint/LinearConstraintTest.java
+/Users/Kota/JAVA/optimization/src/test/java/jp/ac/u_tokyo/iis/space/optimization/function/LinearFunctionTest.java
